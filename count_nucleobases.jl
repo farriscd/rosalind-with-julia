@@ -1,4 +1,4 @@
-function count_nucleobases(file::String)
+function count_nucleobases(file::AbstractString)
   # Reads in file as one long string, converts to uppercase
   DNA_string = uppercase(readall(file))
 
