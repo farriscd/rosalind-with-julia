@@ -1,8 +1,8 @@
-function count_nucleobases(file::AbstractString)
-  # Reads in file as one long string, converts to uppercase
-  DNA_string = uppercase(readall(file))
+function count_nucleobases(string::AbstractString)
+  # Reads in string, converts to uppercase
+  DNA_string = uppercase(string)
 
-  a = c = g = t = 0
+a = c = g = t = 0
   println("a c g t")
 
   #  Goes through the string counting each nucleobase, resetting at each
@@ -26,5 +26,3 @@ function count_nucleobases(file::AbstractString)
     println(a, " ", c, " ", g, " ", t)
   end
 end
-
-count_nucleobases(ARGS[1])

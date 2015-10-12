@@ -1,5 +1,5 @@
-function transcribe_DNA_to_RNA(file::AbstractString, out::AbstractString)
-  DNA_string = uppercase(readall(file))
+function transcribe_DNA_to_RNA(DNA_string::AbstractString)
+  DNA_string = DNA_string
   RNA_string = ""
 
   for i = 1:endof(DNA_string)
@@ -9,10 +9,5 @@ function transcribe_DNA_to_RNA(file::AbstractString, out::AbstractString)
       RNA_string = string(RNA_string, DNA_string[i])
     end
   end
-  output_file = ARGS[2]
-  out_file = open(output_file, "w")
-  write(out_file, RNA_string)
-  close(out_file)
+  println(RNA_string)
 end
-
-transcribe_DNA_to_RNA(ARGS[1], ARGS[2])
