@@ -40,12 +40,11 @@ function mortal_rabbits(no_of_months::Integer, lifespan_in_months::Integer)
   for i in 3:no_of_months
     temp = previous_count
     previous_count = current_count
-    if i - lifespan_in_months < 1
+    if i <= lifespan_in_months - 2
       current_count += temp
       count_history[i] = current_count
     else
-      println(current_count, " - ", count_history[i - lifespan_in_months])
-      current_count += temp - count_history[i - lifespan_in_months]
+      current_count += temp - count_history[i - lifespan_in_months - 1]
       count_history[i] = current_count
     end
   end
