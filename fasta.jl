@@ -1,8 +1,11 @@
 # takes a string as an argument and uses that as a filename
-# should be rewritten to either take ARGS[] for standalone uses
+# TODO: should be rewritten to either take ARGS[] for standalone uses
 # or adapt to be used in a main file
+
 function read_fasta(file::AbstractString)
-  # Check to find how many sequences in the file
+
+  # Check to find how many sequences in the file based on the FASTA
+  # format of beginning each name line with a '>' character
   infile = open(file, "r")
   index_max = count(x -> x == '>', readall(infile))
   fasta = Array{AbstractString}(index_max, 2)
@@ -13,18 +16,18 @@ function read_fasta(file::AbstractString)
     return error("Not a proper FASTA formatted file")
   end
 
+  # Initializing variables
   infile = open(file, "r")
-
-  # initialize variables and move to first entry in file
   index = 1
   indentifier = ""
   sequence = ""
 
+  # Reads to the first name in the file
   readuntil(infile, ">")
   identifier = sequence_name(readline(infile))
   fasta[index, 1] = identifier
 
-  # scan file line by line, reading and sorting into an array
+  # Scans file line by line, reading and sorting into an array
   for ln in eachline(infile)
     if startswith(ln, '>')
       index += 1
@@ -37,6 +40,9 @@ function read_fasta(file::AbstractString)
     end
   end
 
+  # Returns the file as a 2 dimensional array, with the first
+  # column filled by sequence names, and the sequence itself
+  # stored in the second column.
   return fasta
 end
 
